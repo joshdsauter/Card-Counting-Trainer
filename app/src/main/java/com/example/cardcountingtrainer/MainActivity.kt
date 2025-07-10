@@ -30,7 +30,7 @@ fun CardCountingTrainerApp() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "main_menu") {
         composable("main_menu") { MainMenuScreen(navController) }
-        composable("practice") { PracticeScreen() }
-        composable("settings") { SettingsScreen() }
+        composable("practice") { PracticeScreen(navController) }
+        composable("settings") { SettingsScreen(navController) }
     }
 }

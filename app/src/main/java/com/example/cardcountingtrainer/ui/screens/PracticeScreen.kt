@@ -1,16 +1,36 @@
 package com.example.cardcountingtrainer.ui.screens
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.Alignment
+import androidx.navigation.NavHostController
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PracticeScreen() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "🃏 Practice Mode Coming Soon!", style = MaterialTheme.typography.headlineSmall)
+fun PracticeScreen(navController: NavHostController) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Practice") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text("🃏 Practice Mode Coming Soon!", style = MaterialTheme.typography.headlineSmall)
+        }
     }
 }
