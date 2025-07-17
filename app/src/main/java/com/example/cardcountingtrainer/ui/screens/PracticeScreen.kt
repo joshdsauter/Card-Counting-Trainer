@@ -1,7 +1,22 @@
 package com.example.cardcountingtrainer.ui.screens
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -10,14 +25,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.cardcountingtrainer.core.StrategyAction
-import com.example.cardcountingtrainer.ui.components.PlayingCardView // Still using this
+import com.example.cardcountingtrainer.ui.components.TextCardView
 import com.example.cardcountingtrainer.viewmodel.PracticeViewModel
 
+// In ui/PracticeScreen.kt
+// Import your new TextCardView
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
     val uiState = practiceViewModel.uiState
-    val cardWidth = 75.dp // Define a common card width
+    val cardWidth = 65.dp // Adjust as needed for text cards
 
     Scaffold(
         topBar = {
@@ -31,7 +48,6 @@ fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            // Score Display (remains the same)
             ScoreDisplay(
                 score = uiState.score,
                 totalAttempts = uiState.totalAttempts,
@@ -40,7 +56,6 @@ fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Dealer's Hand (Layout remains the same, PlayingCardView handles simplified image)
             Text("Dealer's Hand", style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(8.dp))
             Row(
@@ -48,24 +63,35 @@ fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 if (uiState.dealerCard != null) {
-                    PlayingCardView( // Will use simplified images
-                        card = uiState.dealerCard,
+                    TextCardView( // USE TextCardView HERE
+                        cardValue = uiState.dealerCard.value, // Pass the string value
                         isFaceUp = true,
                         cardWidth = cardWidth
                     )
-                    PlayingCardView( // Will use card_back.png
-                        card = null,
+                    TextCardView( // And HERE for the card back
+                        cardValue = null, // Or uiState.dealerCard.value, will be hidden by isFaceUp
                         isFaceUp = false,
                         cardWidth = cardWidth
                     )
                 } else {
-                    Box(modifier = Modifier.height(cardWidth * (3.5f/2.5f) + 8.dp))
+                    // Placeholder (same aspect ratio as card)
+                    Box(
+                        modifier = Modifier
+                            .width(cardWidth)
+                            .aspectRatio(2.5f / 3.5f)
+                            .padding(horizontal = 4.dp)
+                    ) // Maintain spacing
+                    Box(
+                        modifier = Modifier
+                            .width(cardWidth)
+                            .aspectRatio(2.5f / 3.5f)
+                            .padding(horizontal = 4.dp)
+                    )
                 }
             }
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // Player's Hand (Layout remains the same, PlayingCardView handles simplified image)
             Text("Your Hand", style = MaterialTheme.typography.titleMedium)
             if (uiState.playerCards.isNotEmpty()) {
                 Text(
@@ -81,20 +107,20 @@ fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
             ) {
                 if (uiState.playerCards.isNotEmpty()) {
                     uiState.playerCards.forEach { playerCard ->
-                        PlayingCardView( // Will use simplified images
-                            card = playerCard,
+                        TextCardView( // USE TextCardView HERE
+                            cardValue = playerCard.value, // Pass the string value
                             isFaceUp = true,
                             cardWidth = cardWidth
                         )
                     }
                 } else {
-                    Box(modifier = Modifier.height(cardWidth * (3.5f/2.5f) + 8.dp))
+                    // Placeholder if player cards are not yet available
+                    Box(modifier = Modifier.height(cardWidth * (3.5f / 2.5f) + 8.dp))
                 }
             }
 
             Spacer(modifier = Modifier.weight(0.5f))
 
-            // Action Buttons & Feedback (remains the same)
             if (uiState.correctAnswer != null) {
                 ActionButtons(
                     onHit = { practiceViewModel.submitAnswer(StrategyAction.HIT) },
@@ -117,7 +143,6 @@ fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Next Hand Button (remains the same)
             Button(
                 onClick = { practiceViewModel.generateNewHand() },
                 modifier = Modifier.fillMaxWidth()
@@ -128,6 +153,7 @@ fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
     }
 }
 
+// ScoreDisplay composable (remains the same)
 @Composable
 fun ScoreDisplay(score: Int, totalAttempts: Int, accuracy: Float) {
     Row(
@@ -145,22 +171,7 @@ fun ScoreDisplay(score: Int, totalAttempts: Int, accuracy: Float) {
     }
 }
 
-@Composable
-fun HandDisplay(
-    dealerCard: String,
-    playerCards: String,
-    playerSum: Int,
-    handType: String,
-    isPair: Boolean
-) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("Dealer Shows: $dealerCard", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-        Spacer(modifier = Modifier.height(12.dp))
-        Text("Your Hand: $playerCards", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-        Text("Total: $playerSum ($handType)${if (isPair) " - Pair" else ""}", fontSize = 18.sp)
-    }
-}
-
+// ActionButtons composable (remains the same)
 @Composable
 fun ActionButtons(
     onHit: () -> Unit,

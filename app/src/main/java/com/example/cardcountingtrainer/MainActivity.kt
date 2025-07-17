@@ -9,7 +9,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel // Import this
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.cardcountingtrainer.ui.PracticeScreen
+import com.example.cardcountingtrainer.ui.screens.PracticeScreen
 import com.example.cardcountingtrainer.ui.screens.MainMenuScreen
 import com.example.cardcountingtrainer.ui.screens.SettingsScreen
 import com.example.cardcountingtrainer.ui.theme.CardCountingTrainerTheme
