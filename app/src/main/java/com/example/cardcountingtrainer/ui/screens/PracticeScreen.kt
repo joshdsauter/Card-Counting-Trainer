@@ -11,8 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.example.cardcountingtrainer.core.StrategyAction
 import com.example.cardcountingtrainer.ui.components.TextCardView
 import com.example.cardcountingtrainer.viewmodel.PracticeViewModel
@@ -32,13 +37,19 @@ import com.example.cardcountingtrainer.viewmodel.PracticeViewModel
 // Import your new TextCardView
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PracticeScreen(practiceViewModel: PracticeViewModel = viewModel()) {
+fun PracticeScreen(navController: NavHostController, practiceViewModel: PracticeViewModel = viewModel()) {
     val uiState = practiceViewModel.uiState
     val cardWidth = 65.dp // Adjust as needed for text cards
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Blackjack Strategy Practice") })
+            TopAppBar(title = { Text("Blackjack Strategy Practice") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
+                )
         }
     ) { paddingValues ->
         Column(

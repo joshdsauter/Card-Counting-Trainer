@@ -35,7 +35,7 @@ fun CardCountingTrainerApp() {
         composable("practice") {
             // Obtain the ViewModel instance here
             val practiceViewModel: PracticeViewModel = viewModel()
-            PracticeScreen(practiceViewModel = practiceViewModel)
+            PracticeScreen(navController = navController, practiceViewModel = practiceViewModel)
         }
         composable("settings") { SettingsScreen(navController) }
     }
