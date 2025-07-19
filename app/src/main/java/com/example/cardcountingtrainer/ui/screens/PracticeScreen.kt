@@ -22,6 +22,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -32,6 +34,11 @@ import androidx.navigation.NavHostController
 import com.example.cardcountingtrainer.core.StrategyAction
 import com.example.cardcountingtrainer.ui.components.TextCardView
 import com.example.cardcountingtrainer.viewmodel.PracticeViewModel
+import androidx.compose.material3.Switch // For the toggle switch
+import androidx.compose.runtime.getValue // For property delegation
+import androidx.compose.runtime.setValue // For property delegation
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable // To save toggle state across recompositions/configuration changes
 
 // In ui/PracticeScreen.kt
 // Import your new TextCardView
@@ -40,6 +47,7 @@ import com.example.cardcountingtrainer.viewmodel.PracticeViewModel
 fun PracticeScreen(navController: NavHostController, practiceViewModel: PracticeViewModel = viewModel()) {
     val uiState = practiceViewModel.uiState
     val cardWidth = 65.dp // Adjust as needed for text cards
+    var showSumAndHandType by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -59,6 +67,22 @@ fun PracticeScreen(navController: NavHostController, practiceViewModel: Practice
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp), // Add some padding around the toggle row
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.End // Aligns toggle to the right, adjust as needed
+            ) {
+                Text("Show sum and hand type", style = MaterialTheme.typography.bodyMedium)
+                Spacer(modifier = Modifier.width(8.dp)) // Space between label and switch
+                Switch(
+                    checked = showSumAndHandType,
+                    onCheckedChange = { isChecked ->
+                        showSumAndHandType = isChecked
+                    }
+                )
+            }
             ScoreDisplay(
                 score = uiState.score,
                 totalAttempts = uiState.totalAttempts,
@@ -104,7 +128,7 @@ fun PracticeScreen(navController: NavHostController, practiceViewModel: Practice
             Spacer(modifier = Modifier.weight(1f))
 
             Text("Your Hand", style = MaterialTheme.typography.titleMedium)
-            if (uiState.playerCards.isNotEmpty()) {
+            if (showSumAndHandType && uiState.playerCards.isNotEmpty()) {
                 Text(
                     "Total: ${uiState.playerSum} (${uiState.handType.name})${if (uiState.isPair) " - Pair" else ""}",
                     fontSize = 16.sp,
