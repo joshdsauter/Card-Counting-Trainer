@@ -15,7 +15,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
 @Composable
-fun MainMenuScreen(navController: NavHostController) {
+fun MainMenuScreen(
+    navController: NavHostController,
+    onNavigateToPractice: () -> Unit, // Added: Callback for practice navigation
+    onNavigateToSettings: () -> Unit  // Added: Callback for settings navigation
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
@@ -31,10 +35,10 @@ fun MainMenuScreen(navController: NavHostController) {
                 text = "Card Counting Trainer",
                 style = MaterialTheme.typography.headlineLarge
             )
-            Button(onClick = { navController.navigate("practice") }) {
+            Button(onClick = onNavigateToPractice) { // Changed: Use the callback
                 Text("Blackjack Strategy Practice")
             }
-            Button(onClick = { navController.navigate("settings") }) {
+            Button(onClick = onNavigateToSettings) { // Changed: Use the callback
                 Text("Settings")
             }
         }

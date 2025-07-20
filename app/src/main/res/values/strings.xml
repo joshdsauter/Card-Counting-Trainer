@@ -1,3 +1,38 @@
 <resources>
     <string name="app_name">CardCountingTrainer</string>
+    <!-- ... other strings ... -->
+    <string name="how_to_practice_title">How to Practice</string>
+    <string name="practice_guide_header">Blackjack Practice Guide</string>
+    <string name="goal_title">Goal</string>
+    <string name="goal_description">The goal is to get a hand total closer to 21 than the dealer,
+        without going over 21 (busting).
+    </string>
+    <string name="card_values_title">Card Values</string>
+    <string name="card_values_description">Number cards are their face value. Face cards (King,
+        Queen, Jack) are 10. Aces can be 1 or 11.
+    </string>
+    <string name="player_actions_header">Player Actions:</string>
+    <string name="hit_title">Hit</string>
+    <string name="hit_description">Take another card. You can hit as many times as you want, but if
+        your total exceeds 21, you bust and lose.
+    </string>
+    <string name="stand_title">Stand</string>
+    <string name="stand_description">Keep your current hand and end your turn. The dealer then plays
+        their hand.
+    </string>
+    <string name="double_down_title">Double Down</string>
+    <string name="double_down_description">Double your initial bet and receive only one more card.
+        This is often a good move when your first two cards total 9, 10, or 11.
+    </string>
+    <string name="split_title">Split (Pairs)</string>
+    <string name="split_description">If your first two cards are a pair (e.g., two 8s), you can
+        split them into two separate hands. Each hand gets a new second card, and you play them
+        independently. A second bet equal to your first is placed on the new hand.
+    </string>
+    <string name="practice_screen_explanation_title">Practice Screen</string>
+    <string name="practice_screen_explanation_description">On the next screen, you\'ll be shown a
+        player hand and a dealer up-card. Your task is to choose the correct action (Hit, Stand,
+        Double Down, or Split) based on Basic Blackjack Strategy.
+    </string>
+    <string name="got_it_button">Got it, Let\'s Practice!</string>
 </resources>

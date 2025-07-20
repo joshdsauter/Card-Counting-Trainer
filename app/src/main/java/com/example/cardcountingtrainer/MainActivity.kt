@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cardcountingtrainer.ui.screens.PracticeScreen
 import com.example.cardcountingtrainer.ui.screens.MainMenuScreen
+import com.example.cardcountingtrainer.ui.screens.PracticeInstructionsScreen
 import com.example.cardcountingtrainer.ui.screens.SettingsScreen
 import com.example.cardcountingtrainer.ui.theme.CardCountingTrainerTheme
 import com.example.cardcountingtrainer.viewmodel.PracticeViewModel // If PracticeViewModel is in a different package
@@ -31,9 +32,29 @@ class MainActivity : ComponentActivity() {
 fun CardCountingTrainerApp() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "main_menu") {
-        composable("main_menu") { MainMenuScreen(navController) }
+        composable("main_menu") {
+            MainMenuScreen(
+                navController = navController, // Pass if MainMenuScreen still directly uses it
+                onNavigateToPractice = {
+                    navController.navigate("practice_instructions")
+                },
+                onNavigateToSettings = { // <-- This was missing
+                    navController.navigate("settings")
+                }
+            )
+        }
+        // New route for the practice instructions screen
+        composable("practice_instructions") {
+            PracticeInstructionsScreen(
+                onContinueClicked = {
+                    navController.navigate("practice") {
+                        // Optional: Remove instructions screen from back stack
+                        popUpTo("practice_instructions") { inclusive = true }
+                    }
+                }
+            )
+        }
         composable("practice") {
-            // Obtain the ViewModel instance here
             val practiceViewModel: PracticeViewModel = viewModel()
             PracticeScreen(navController = navController, practiceViewModel = practiceViewModel)
         }
