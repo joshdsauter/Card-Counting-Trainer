@@ -30,7 +30,7 @@ fun SettingsScreen(navController: NavHostController) {
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text("⚙️ Settings Coming Soon!", style = MaterialTheme.typography.headlineSmall)
+            Text("⚙️ No settings available yet.", style = MaterialTheme.typography.headlineSmall)
         }
     }
 }
