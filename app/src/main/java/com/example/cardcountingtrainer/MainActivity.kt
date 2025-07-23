@@ -34,7 +34,6 @@ fun CardCountingTrainerApp() {
     NavHost(navController = navController, startDestination = "main_menu") {
         composable("main_menu") {
             MainMenuScreen(
-                navController = navController, // Pass if MainMenuScreen still directly uses it
                 onNavigateToPractice = {
                     navController.navigate("practice_instructions")
                 },

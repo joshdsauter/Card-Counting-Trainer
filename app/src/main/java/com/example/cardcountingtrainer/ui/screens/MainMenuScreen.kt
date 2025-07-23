@@ -16,7 +16,6 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun MainMenuScreen(
-    navController: NavHostController,
     onNavigateToPractice: () -> Unit, // Added: Callback for practice navigation
     onNavigateToSettings: () -> Unit  // Added: Callback for settings navigation
 ) {
