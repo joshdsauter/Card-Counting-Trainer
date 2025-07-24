@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cardcountingtrainer.ui.screens.PracticeScreen
 import com.example.cardcountingtrainer.ui.screens.MainMenuScreen
+import com.example.cardcountingtrainer.ui.screens.CountingPracticeInstructionsScreen
 import com.example.cardcountingtrainer.ui.screens.PracticeInstructionsScreen
 import com.example.cardcountingtrainer.ui.screens.SettingsScreen
 import com.example.cardcountingtrainer.ui.theme.CardCountingTrainerTheme
@@ -47,7 +48,7 @@ fun CardCountingTrainerApp() {
         }
         // Add a new route for the count practice that temporarily shows the practice instructions screen
         composable("counting_practice") {
-            PracticeInstructionsScreen(
+            CountingPracticeInstructionsScreen(
                 onContinueClicked = {
                     navController.navigate("practice") {
                         // Optional: Remove instructions screen from back stack
