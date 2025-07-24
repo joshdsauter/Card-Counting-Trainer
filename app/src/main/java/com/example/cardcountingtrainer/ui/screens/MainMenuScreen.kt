@@ -12,10 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+
 
 @Composable
 fun MainMenuScreen(
+    onNavigateToCountingPractice: () -> Unit,
     onNavigateToPractice: () -> Unit, // Added: Callback for practice navigation
     onNavigateToSettings: () -> Unit  // Added: Callback for settings navigation
 ) {
@@ -36,6 +37,9 @@ fun MainMenuScreen(
             )
             Button(onClick = onNavigateToPractice) { // Changed: Use the callback
                 Text("Blackjack Strategy Practice")
+            }
+            Button(onClick = onNavigateToCountingPractice) {
+                Text("Card counting practice")
             }
             Button(onClick = onNavigateToSettings) { // Changed: Use the callback
                 Text("Settings")

@@ -34,11 +34,25 @@ fun CardCountingTrainerApp() {
     NavHost(navController = navController, startDestination = "main_menu") {
         composable("main_menu") {
             MainMenuScreen(
+                onNavigateToCountingPractice = {
+                    navController.navigate("counting_practice")
+                },
                 onNavigateToPractice = {
                     navController.navigate("practice_instructions")
                 },
                 onNavigateToSettings = { // <-- This was missing
                     navController.navigate("settings")
+                }
+            )
+        }
+        // Add a new route for the count practice that temporarily shows the practice instructions screen
+        composable("counting_practice") {
+            PracticeInstructionsScreen(
+                onContinueClicked = {
+                    navController.navigate("practice") {
+                        // Optional: Remove instructions screen from back stack
+                        popUpTo("practice_instructions") { inclusive = true }
+                    }
                 }
             )
         }
