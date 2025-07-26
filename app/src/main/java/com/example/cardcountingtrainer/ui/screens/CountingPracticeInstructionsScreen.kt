@@ -1,8 +1,8 @@
 package com.example.cardcountingtrainer.ui.screens // Or your appropriate UI package
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState // Import this
-import androidx.compose.foundation.verticalScroll // Import this
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,93 +13,79 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class) // Keep if TopAppBar is Material 3
 @Composable
-fun CountingPracticeInstructionsScreen(
+fun CountingPracticeInstructionsScreen( // Renamed for clarity, or keep as is if you prefer
     onContinueClicked: () -> Unit
 ) {
-    val scrollState = rememberScrollState() // 1. Remember the scroll state
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("How to Practice" /* or stringResource(R.string.how_to_practice_title) */) }
+                title = { Text("Hi-Lo Card Counting Guide" /* or stringResource(R.string.hilo_guide_title) */) }
             )
         }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues) // Apply padding from Scaffold
-                .verticalScroll(scrollState) // 2. Apply the verticalScroll modifier
-                .padding(16.dp), // Apply your content padding *after* scrolling
+                .padding(paddingValues)
+                .verticalScroll(scrollState)
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            // verticalArrangement = Arrangement.spacedBy(16.dp) // SpacedBy might behave differently with scroll, consider using Spacer() or padding on items
         ) {
             Text(
-                text = "Blackjack Practice Guide", // or stringResource(R.string.practice_guide_header)
+                text = "Learn Hi-Lo Card Counting", // or stringResource(R.string.hilo_header)
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 16.dp) // Add some padding
+                modifier = Modifier.padding(bottom = 24.dp) // Increased padding
             )
 
             InstructionItem(
-                title = "Goal", // or stringResource(R.string.goal_title)
-                description = "The goal is to get a hand total closer to 21 than the dealer, without going over 21 (busting)." // or stringResource(R.string.goal_description)
+                title = "What is Card Counting?", // or stringResource(R.string.what_is_card_counting_title)
+                description = "Card counting is a blackjack strategy used to determine whether the next hand is likely to give an advantage to the player or dealer. It involves keeping a 'running count' based on the values of cards dealt." // or stringResource(R.string.what_is_card_counting_description)
             )
 
             InstructionItem(
-                title = "Card Values", // or stringResource(R.string.card_values_title)
-                description = "Number cards are their face value. Face cards (King, Queen, Jack) are 10. Aces can be 1 or 11." // or stringResource(R.string.card_values_description)
+                title = "The Hi-Lo System", // or stringResource(R.string.hilo_system_title)
+                description = "Hi-Lo is the most common card counting system. Each card is assigned a value:" // or stringResource(R.string.hilo_system_description)
             )
 
-            Text(
-                text = "Player Actions:", // or stringResource(R.string.player_actions_header)
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+            // Specific Hi-Lo Values
+            InstructionItem(
+                title = "Low Cards (2, 3, 4, 5, 6)", // or stringResource(R.string.low_cards_title)
+                description = "Value: +1 (Plus One)\nThese cards increase the proportion of high cards remaining in the deck, which is good for the player." // or stringResource(R.string.low_cards_description)
             )
 
             InstructionItem(
-                title = "Hit", // or stringResource(R.string.hit_title)
-                description = "Take another card. You can hit as many times as you want, but if your total exceeds 21, you bust and lose." // or stringResource(R.string.hit_description)
+                title = "Neutral Cards (7, 8, 9)", // or stringResource(R.string.neutral_cards_title)
+                description = "Value: 0 (Zero)\nThese cards are considered neutral and do not change the running count." // or stringResource(R.string.neutral_cards_description)
             )
 
             InstructionItem(
-                title = "Stand", // or stringResource(R.string.stand_title)
-                description = "Keep your current hand and end your turn. The dealer then plays their hand." // or stringResource(R.string.stand_description)
+                title = "High Cards (10, Jack, Queen, King, Ace)", // or stringResource(R.string.high_cards_title)
+                description = "Value: -1 (Minus One)\nThese cards decrease the proportion of high cards remaining, which is less favorable for the player." // or stringResource(R.string.high_cards_description)
             )
 
             InstructionItem(
-                title = "Double Down", // or stringResource(R.string.double_down_title)
-                description = "Double your initial bet and receive only one more card. This is often a good move when your first two cards total 9, 10, or 11." // or stringResource(R.string.double_down_description)
+                title = "Keeping the Running Count", // or stringResource(R.string.running_count_title)
+                description = "Start with a count of 0 when the shoe (deck of cards) is new. As each card is dealt face up, you update your running count based on its Hi-Lo value (+1, 0, or -1).\nExample: If a 5 (+1), a King (-1), and an 8 (0) are dealt, the running count is +1 -1 + 0 = 0." // or stringResource(R.string.running_count_description)
             )
 
             InstructionItem(
-                title = "Split (Pairs)", // or stringResource(R.string.split_title)
-                description = "If your first two cards are a pair (e.g., two 8s), you can split them into two separate hands. Each hand gets a new second card, and you play them independently. A second bet equal to your first is placed on the new hand." // or stringResource(R.string.split_description)
+                title = "Practice Goal", // or stringResource(R.string.practice_goal_counting_title)
+                description = "On the next screen, cards will be shown one by one. Your goal is to keep an accurate running count. This screen focuses *only* on the counting, not on betting or playing strategy based on the count." // or stringResource(R.string.practice_goal_counting_description)
             )
-            InstructionItem(
-                title = "Practice Screen", // or stringResource(R.string.practice_screen_explanation_title)
-                description = "On the next screen, you'll be shown a player hand and a dealer up-card. Your task is to choose the correct action (Hit, Stand, Double Down, or Split) based on Basic Blackjack Strategy." // or stringResource(R.string.practice_screen_explanation_description)
-            )
-
-            // The Spacer with weight(1f) might not be ideal in a scrollable column
-            // if you want the button at the very bottom of the content.
-            // If the content is short, it will be in the middle.
-            // If the content is long, it will be scrollable to.
-            // Consider placing the button outside the scrollable Column if you want it fixed at the bottom of the screen.
-            // For now, let's keep it simple and have it scroll with the content.
-            // Spacer(modifier = Modifier.weight(1f)) // Remove or adjust if button shouldn't be pushed down by empty space in a scrollable view.
 
             Button(
                 onClick = onContinueClicked,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp, bottom = 16.dp) // Add padding around the button
+                    .padding(top = 24.dp, bottom = 16.dp)
             ) {
-                Text("Got it, Let's Practice!" /* or stringResource(R.string.got_it_button) */)
+                Text("Got it, Let's Count!" /* or stringResource(R.string.got_it_counting_button) */)
             }
         }
     }
@@ -110,6 +96,6 @@ fun CountingPracticeInstructionsScreen(
 fun CountingPracticeInstructionsScreenPreview() {
     // Wrap in your theme for accurate preview if needed
     // CardCountingTrainerTheme {
-    PracticeInstructionsScreen(onContinueClicked = {})
+    CountingPracticeInstructionsScreen(onContinueClicked = {})
     // }
 }
