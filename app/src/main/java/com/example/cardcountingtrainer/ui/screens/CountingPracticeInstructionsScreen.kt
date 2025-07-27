@@ -13,9 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@OptIn(ExperimentalMaterial3Api::class) // Keep if TopAppBar is Material 3
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountingPracticeInstructionsScreen( // Renamed for clarity, or keep as is if you prefer
+fun CountingPracticeInstructionsScreen(
     onContinueClicked: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -36,46 +36,45 @@ fun CountingPracticeInstructionsScreen( // Renamed for clarity, or keep as is if
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "Learn Hi-Lo Card Counting", // or stringResource(R.string.hilo_header)
+                text = "Learn Hi-Lo Card Counting",
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 24.dp) // Increased padding
+                modifier = Modifier.padding(bottom = 24.dp)
             )
 
             InstructionItem(
-                title = "What is Card Counting?", // or stringResource(R.string.what_is_card_counting_title)
+                title = "What is Card Counting?",
                 description = "Card counting is a blackjack strategy used to determine whether the next hand is likely to give an advantage to the player or dealer. It involves keeping a 'running count' based on the values of cards dealt." // or stringResource(R.string.what_is_card_counting_description)
             )
 
             InstructionItem(
-                title = "The Hi-Lo System", // or stringResource(R.string.hilo_system_title)
+                title = "The Hi-Lo System",
                 description = "Hi-Lo is the most common card counting system. Each card is assigned a value:" // or stringResource(R.string.hilo_system_description)
             )
 
-            // Specific Hi-Lo Values
             InstructionItem(
-                title = "Low Cards (2, 3, 4, 5, 6)", // or stringResource(R.string.low_cards_title)
+                title = "Low Cards (2, 3, 4, 5, 6)",
                 description = "Value: +1 (Plus One)\nThese cards increase the proportion of high cards remaining in the deck, which is good for the player." // or stringResource(R.string.low_cards_description)
             )
 
             InstructionItem(
-                title = "Neutral Cards (7, 8, 9)", // or stringResource(R.string.neutral_cards_title)
+                title = "Neutral Cards (7, 8, 9)",
                 description = "Value: 0 (Zero)\nThese cards are considered neutral and do not change the running count." // or stringResource(R.string.neutral_cards_description)
             )
 
             InstructionItem(
-                title = "High Cards (10, Jack, Queen, King, Ace)", // or stringResource(R.string.high_cards_title)
+                title = "High Cards (10, Jack, Queen, King, Ace)",
                 description = "Value: -1 (Minus One)\nThese cards decrease the proportion of high cards remaining, which is less favorable for the player." // or stringResource(R.string.high_cards_description)
             )
 
             InstructionItem(
-                title = "Keeping the Running Count", // or stringResource(R.string.running_count_title)
+                title = "Keeping the Running Count",
                 description = "Start with a count of 0 when the shoe (deck of cards) is new. As each card is dealt face up, you update your running count based on its Hi-Lo value (+1, 0, or -1).\nExample: If a 5 (+1), a King (-1), and an 8 (0) are dealt, the running count is +1 -1 + 0 = 0." // or stringResource(R.string.running_count_description)
             )
 
             InstructionItem(
-                title = "Practice Goal", // or stringResource(R.string.practice_goal_counting_title)
+                title = "Practice Goal",
                 description = "On the next screen, cards will be shown one by one. Your goal is to keep an accurate running count. This screen focuses *only* on the counting, not on betting or playing strategy based on the count." // or stringResource(R.string.practice_goal_counting_description)
             )
 
@@ -85,7 +84,7 @@ fun CountingPracticeInstructionsScreen( // Renamed for clarity, or keep as is if
                     .fillMaxWidth()
                     .padding(top = 24.dp, bottom = 16.dp)
             ) {
-                Text("Got it, Let's Count!" /* or stringResource(R.string.got_it_counting_button) */)
+                Text("Got it, Let's Count!")
             }
         }
     }
@@ -94,8 +93,5 @@ fun CountingPracticeInstructionsScreen( // Renamed for clarity, or keep as is if
 @Preview(showBackground = true)
 @Composable
 fun CountingPracticeInstructionsScreenPreview() {
-    // Wrap in your theme for accurate preview if needed
-    // CardCountingTrainerTheme {
     CountingPracticeInstructionsScreen(onContinueClicked = {})
-    // }
 }
