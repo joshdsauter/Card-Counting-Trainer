@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cardcountingtrainer.ui.screens.PracticeScreen
 import com.example.cardcountingtrainer.ui.screens.MainMenuScreen
 import com.example.cardcountingtrainer.ui.screens.CountingPracticeInstructionsScreen
+import com.example.cardcountingtrainer.ui.screens.CountingPracticeScreen
 import com.example.cardcountingtrainer.ui.screens.PracticeInstructionsScreen
 import com.example.cardcountingtrainer.ui.screens.SettingsScreen
 import com.example.cardcountingtrainer.ui.theme.CardCountingTrainerTheme
@@ -36,7 +37,7 @@ fun CardCountingTrainerApp() {
         composable("main_menu") {
             MainMenuScreen(
                 onNavigateToCountingPractice = {
-                    navController.navigate("counting_practice")
+                    navController.navigate("counting_practice_instructions")
                 },
                 onNavigateToPractice = {
                     navController.navigate("practice_instructions")
@@ -47,12 +48,12 @@ fun CardCountingTrainerApp() {
             )
         }
         // Add a new route for the count practice that temporarily shows the practice instructions screen
-        composable("counting_practice") {
+        composable("counting_practice_instructions") {
             CountingPracticeInstructionsScreen(
                 onContinueClicked = {
-                    navController.navigate("practice") {
+                    navController.navigate("countong_practice") {
                         // Optional: Remove instructions screen from back stack
-                        popUpTo("practice_instructions") { inclusive = true }
+                        popUpTo("counting_practice_instructions") { inclusive = true }
                     }
                 }
             )
@@ -67,6 +68,9 @@ fun CardCountingTrainerApp() {
                     }
                 }
             )
+        }
+        composable("counting_practice") {
+            CountingPracticeScreen()
         }
         composable("practice") {
             val practiceViewModel: PracticeViewModel = viewModel()
