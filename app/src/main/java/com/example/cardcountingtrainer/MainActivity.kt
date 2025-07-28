@@ -51,7 +51,7 @@ fun CardCountingTrainerApp() {
         composable("counting_practice_instructions") {
             CountingPracticeInstructionsScreen(
                 onContinueClicked = {
-                    navController.navigate("countong_practice") {
+                    navController.navigate("counting_practice") {
                         // Optional: Remove instructions screen from back stack
                         popUpTo("counting_practice_instructions") { inclusive = true }
                     }
