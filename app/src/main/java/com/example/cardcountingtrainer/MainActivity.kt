@@ -42,28 +42,26 @@ fun CardCountingTrainerApp() {
                 onNavigateToPractice = {
                     navController.navigate("practice_instructions")
                 },
-                onNavigateToSettings = { // <-- This was missing
+                onNavigateToSettings = {
                     navController.navigate("settings")
                 }
             )
         }
-        // Add a new route for the count practice that temporarily shows the practice instructions screen
+
         composable("counting_practice_instructions") {
             CountingPracticeInstructionsScreen(
                 onContinueClicked = {
                     navController.navigate("counting_practice") {
-                        // Optional: Remove instructions screen from back stack
                         popUpTo("counting_practice_instructions") { inclusive = true }
                     }
                 }
             )
         }
-        // New route for the practice instructions screen
+
         composable("practice_instructions") {
             PracticeInstructionsScreen(
                 onContinueClicked = {
                     navController.navigate("practice") {
-                        // Optional: Remove instructions screen from back stack
                         popUpTo("practice_instructions") { inclusive = true }
                     }
                 }
