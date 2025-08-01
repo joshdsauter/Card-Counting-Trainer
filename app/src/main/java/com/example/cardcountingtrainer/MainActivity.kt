@@ -68,7 +68,7 @@ fun CardCountingTrainerApp() {
             )
         }
         composable("counting_practice") {
-            CountingPracticeScreen()
+            CountingPracticeScreen(navController = navController)
         }
         composable("practice") {
             val practiceViewModel: PracticeViewModel = viewModel()
