@@ -1,4 +1,4 @@
-package com.example.cardcountingtrainer.ui.screens // Adjust package if needed
+package com.example.cardcountingtrainer.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
