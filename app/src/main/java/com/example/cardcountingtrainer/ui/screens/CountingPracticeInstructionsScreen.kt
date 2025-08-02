@@ -3,19 +3,22 @@ package com.example.cardcountingtrainer.ui.screens // Or your appropriate UI pac
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountingPracticeInstructionsScreen(
+    navController: NavHostController,
     onContinueClicked: () -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -23,6 +26,11 @@ fun CountingPracticeInstructionsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                },
                 title = { Text("Hi-Lo Card Counting Guide" /* or stringResource(R.string.hilo_guide_title) */) }
             )
         }
@@ -88,10 +96,4 @@ fun CountingPracticeInstructionsScreen(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun CountingPracticeInstructionsScreenPreview() {
-    CountingPracticeInstructionsScreen(onContinueClicked = {})
 }
