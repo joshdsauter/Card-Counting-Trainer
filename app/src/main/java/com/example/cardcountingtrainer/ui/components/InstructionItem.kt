@@ -18,7 +18,7 @@ fun InstructionItem(title: String, description: String) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp) // Add vertical padding to space out items
+            .padding(vertical = 8.dp)
     ) {
         Text(
             text = title,
@@ -29,8 +29,8 @@ fun InstructionItem(title: String, description: String) {
         Text(
             text = description,
             fontSize = 16.sp,
-            textAlign = TextAlign.Justify // Justify can sometimes look odd with short lines, consider TextAlign.Start
+            textAlign = TextAlign.Justify
         )
-        Divider(modifier = Modifier.padding(top = 16.dp)) // Increased top padding for divider
+        Divider(modifier = Modifier.padding(top = 16.dp))
     }
 }
