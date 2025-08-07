@@ -21,13 +21,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// In ui/components/TextCardView.kt (create this new file and package if needed)
+
 @Composable
 fun TextCardView(
     modifier: Modifier = Modifier,
     cardValue: String?, // The value to display (e.g., "A", "K", "10", "7") or null for card back
     isFaceUp: Boolean = true,
-    cardWidth: Dp = 70.dp, // Slightly smaller default for text cards might look better
+    cardWidth: Dp = 70.dp,
     backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     contentColor: Color = MaterialTheme.colorScheme.onSurfaceVariant,
     borderColor: Color = MaterialTheme.colorScheme.outline
@@ -43,13 +43,13 @@ fun TextCardView(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(4.dp), // Padding inside the card
+                .padding(4.dp),
             contentAlignment = Alignment.Center
         ) {
             if (isFaceUp && cardValue != null) {
                 Text(
                     text = cardValue.uppercase(),
-                    fontSize = when (cardValue.length) { // Adjust font size for longer values like "10"
+                    fontSize = when (cardValue.length) {
                         1 -> 24.sp
                         2 -> 20.sp
                         else -> 18.sp
@@ -60,18 +60,16 @@ fun TextCardView(
             } else {
                 // For the card back, you can have a pattern or just a solid color
                 // Here, we'll just show nothing, relying on the card's background.
-                // You could draw a pattern here if desired.
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(borderColor.copy(alpha = 0.2f)) // Subtle back pattern
+                        .background(borderColor.copy(alpha = 0.2f))
                 )
             }
         }
     }
 }
 
-// --- Preview for TextCardView ---
 @Preview(showBackground = true, name = "Ace Card")
 @Composable
 fun TextCardViewAcePreview() {
