@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MainMenuScreen(
     onNavigateToCountingPractice: () -> Unit,
-    onNavigateToPractice: () -> Unit, // Added: Callback for practice navigation
-    onNavigateToSettings: () -> Unit  // Added: Callback for settings navigation
+    onNavigateToPractice: () -> Unit,
+    onNavigateToSettings: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize()
@@ -35,13 +35,13 @@ fun MainMenuScreen(
                 text = "Card Counting Trainer",
                 style = MaterialTheme.typography.headlineLarge
             )
-            Button(onClick = onNavigateToPractice) { // Changed: Use the callback
+            Button(onClick = onNavigateToPractice) {
                 Text("Blackjack Strategy Practice")
             }
             Button(onClick = onNavigateToCountingPractice) {
                 Text("Card counting practice")
             }
-            Button(onClick = onNavigateToSettings) { // Changed: Use the callback
+            Button(onClick = onNavigateToSettings) {
                 Text("Settings")
             }
         }
