@@ -1,4 +1,4 @@
-package com.example.cardcountingtrainer.ui.screens // Or your appropriate UI package
+package com.example.cardcountingtrainer.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState // Import this
@@ -45,12 +45,12 @@ fun PracticeInstructionsScreen(
 
             InstructionItem(
                 title = "Goal",
-                description = "The goal is to get a hand total closer to 21 than the dealer, without going over 21 (busting)." // or stringResource(R.string.goal_description)
+                description = "The goal is to get a hand total closer to 21 than the dealer, without going over 21 (busting)."
             )
 
             InstructionItem(
                 title = "Card Values",
-                description = "Number cards are their face value. Face cards (King, Queen, Jack) are 10. Aces can be 1 or 11." // or stringResource(R.string.card_values_description)
+                description = "Number cards are their face value. Face cards (King, Queen, Jack) are 10. Aces can be 1 or 11."
             )
 
             Text(
@@ -62,35 +62,27 @@ fun PracticeInstructionsScreen(
 
             InstructionItem(
                 title = "Hit",
-                description = "Take another card. You can hit as many times as you want, but if your total exceeds 21, you bust and lose." // or stringResource(R.string.hit_description)
+                description = "Take another card. You can hit as many times as you want, but if your total exceeds 21, you bust and lose."
             )
 
             InstructionItem(
                 title = "Stand",
-                description = "Keep your current hand and end your turn. The dealer then plays their hand." // or stringResource(R.string.stand_description)
+                description = "Keep your current hand and end your turn. The dealer then plays their hand."
             )
 
             InstructionItem(
                 title = "Double Down",
-                description = "Double your initial bet and receive only one more card. This is often a good move when your first two cards total 9, 10, or 11." // or stringResource(R.string.double_down_description)
+                description = "Double your initial bet and receive only one more card. This is often a good move when your first two cards total 9, 10, or 11."
             )
 
             InstructionItem(
                 title = "Split (Pairs)",
-                description = "If your first two cards are a pair (e.g., two 8s), you can split them into two separate hands. Each hand gets a new second card, and you play them independently. A second bet equal to your first is placed on the new hand." // or stringResource(R.string.split_description)
+                description = "If your first two cards are a pair (e.g., two 8s), you can split them into two separate hands. Each hand gets a new second card, and you play them independently. A second bet equal to your first is placed on the new hand."
             )
             InstructionItem(
                 title = "Practice Screen",
-                description = "On the next screen, you'll be shown a player hand and a dealer up-card. Your task is to choose the correct action (Hit, Stand, Double Down, or Split) based on Basic Blackjack Strategy." // or stringResource(R.string.practice_screen_explanation_description)
+                description = "On the next screen, you'll be shown a player hand and a dealer up-card. Your task is to choose the correct action (Hit, Stand, Double Down, or Split) based on Basic Blackjack Strategy."
             )
-
-            // The Spacer with weight(1f) might not be ideal in a scrollable column
-            // if you want the button at the very bottom of the content.
-            // If the content is short, it will be in the middle.
-            // If the content is long, it will be scrollable to.
-            // Consider placing the button outside the scrollable Column if you want it fixed at the bottom of the screen.
-            // For now, let's keep it simple and have it scroll with the content.
-            // Spacer(modifier = Modifier.weight(1f)) // Remove or adjust if button shouldn't be pushed down by empty space in a scrollable view.
 
             Button(
                 onClick = onContinueClicked,
